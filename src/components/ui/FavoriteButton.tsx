@@ -1,8 +1,8 @@
 "use client";
 
+import { useFavorites } from "@/contexts/FavoritesContext";
 import { Star } from "lucide-react";
 
-import { useFavorites } from "@/contexts/favorites-context";
 
 interface FavoriteButtonProps {
   productId: number;
