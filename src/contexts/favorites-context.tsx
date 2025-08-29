@@ -48,7 +48,7 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
 
       const data = await response.json();
       setFavorites(new Set(data.favorites));
-    } catch (error) {
+    } catch {
       setFavorites(favorites);
       setError("Error updating favorite. Please try again.");
     } finally {

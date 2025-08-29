@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // In-memory storage for demonstration
-let favorites = new Set<number>();
+const favorites = new Set<number>();
 
 export async function GET() {
   return NextResponse.json({ favorites: Array.from(favorites) });
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       success: true,
       favorites: Array.from(favorites),
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { success: false, error: "Failed to update favorites" },
       { status: 500 }

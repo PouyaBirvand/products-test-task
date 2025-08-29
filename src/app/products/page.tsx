@@ -7,7 +7,7 @@ import { processProducts } from "@/lib/products-utils";
 import { parseSearchParams } from "@/lib/validation";
 
 interface ProductsPageProps {
-  searchParams: Record<string, string | string[] | undefined>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 function LoadingSkeleton() {
@@ -37,7 +37,8 @@ function LoadingSkeleton() {
 }
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
-  const parsedParams = parseSearchParams(searchParams);
+  const resolvedParams = await searchParams;
+  const parsedParams = parseSearchParams(resolvedParams);
   const { products, totalProducts, totalPages, currentPage } = parsedParams.success
     ? processProducts(parsedParams.data)
     : processProducts({ q: "", sort: "name", dir: "asc", page: 1 });
